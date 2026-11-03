@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+# Never commit API keys or local Hafnia config
+.env
+node_modules/
+# Data written when running the notebook locally
+.data/
+notebooks/.data/
+notebooks/data/
