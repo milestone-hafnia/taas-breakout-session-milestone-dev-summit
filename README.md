@@ -77,7 +77,13 @@ You will train a ResNet-18 image classifier on the `mnist` dataset, using a publ
 **Goal:** Use the Hafnia Python SDK and CLI to work with datasets and recipes, and to launch training from code.
 **Time:** about 15 minutes.
 
-👉 **Open the notebook in Google Colab: [LINK-TO-COLAB-NOTEBOOK](LINK-TO-COLAB-NOTEBOOK)**
+👉 **Open the notebook in Google Colab:**
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/milestone-hafnia/taas-breakout-session-milestone-dev-summit/blob/main/notebooks/ex2-customize-and-automate.ipynb)
+
+The link opens your own private copy of the notebook in Colab, running on a free Google machine. You need a
+Google account. When you run the first cell, Colab warns that the notebook was not authored by Google:
+click **Run anyway**. Your changes are not saved when you close the tab, unless you click
+**File → Save a copy in Drive**.
 
 Follow the instructions in the notebook. You only need to provide two things:
 

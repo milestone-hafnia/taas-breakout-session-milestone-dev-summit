@@ -38,7 +38,9 @@ from code, and you customize the data the model trains on:
 
 **Time:** about 15 minutes. Run the cells from top to bottom with **Shift + Enter**.
 
-> **In Google Colab:** click **File → Save a copy in Drive** first, so you can edit and run your own copy.
+> **In Google Colab:** this notebook runs on your own private Colab machine, so nobody else sees your work.
+> - When you run the first cell, Colab warns that the notebook was not authored by Google. Click **Run anyway**.
+> - Your changes are lost when you close the tab. To keep them, click **File → Save a copy in Drive**.
 """
     ),
     md(
@@ -93,7 +95,7 @@ The key is hidden while you type, and it is never printed in the notebook. Keep 
 from getpass import getpass
 
 API_KEY = getpass("Paste your Hafnia API key and press Enter: ")
-assert API_KEY.startswith("ApiKey "), "Set API_KEY in the cell above to your Hafnia API key"
+assert API_KEY.startswith("ApiKey "), "That does not look like a Hafnia API key. Run this cell again and paste the full key, starting with 'ApiKey '"
 """
     ),
     md(
