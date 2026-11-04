@@ -139,6 +139,7 @@ name = "breakout-session"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "hafnia" },
     { name = "python-pptx" },
 ]
 
@@ -156,7 +157,10 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "python-pptx", specifier = ">=1.0.2" }]
+requires-dist = [
+    { name = "hafnia", specifier = ">=0.8.7" },
+    { name = "python-pptx", specifier = ">=1.0.2" },
+]
 
 [package.metadata.requires-dev]
 dev = [

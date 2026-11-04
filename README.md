@@ -12,14 +12,13 @@ You do not need to install anything locally.
 - [Before the session: sign up and join the organization](#before-the-session-sign-up-and-join-the-organization)
 - [Exercise 1: Launch your first training run](#exercise-1-launch-your-first-training-run)
 - [Exercise 2: Customize and automate with the SDK and CLI](#exercise-2-customize-and-automate-with-the-sdk-and-cli)
-- [Exercise 5: Export a model to OpenVINO with INT8 quantization](#exercise-5-export-a-model-to-openvino-with-int8-quantization)
+- [Exercise 3: Export a model to OpenVINO with INT8 quantization](#exercise-3-export-a-model-to-openvino-with-int8-quantization)
 - [Useful links](#useful-links)
 
 ---
 
-## Before the session: sign up and join the organization
-
-Please do this **before the session**. It takes a few minutes and lets us start training right away.
+## Exercise 1a: Sign up and join the organization
+It takes a few minutes and lets us start training right away.
 
 1. **Sign up and log in**
    Go to [hafnia.milestonesys.com](https://hafnia.milestonesys.com/), click **Register**  and create an account.
@@ -42,7 +41,7 @@ Please do this **before the session**. It takes a few minutes and lets us start 
 
 ---
 
-## Exercise 1: Launch your first training run
+## Exercise 1b: Launch your first training run
 
 **Goal:** Train an image classification model without writing any code.
 **Time:** about 10 minutes.
@@ -89,36 +88,42 @@ Follow the instructions in the notebook. You only need to provide two things:
 
 ---
 
-## Exercise 5: Export a model to OpenVINO with INT8 quantization
+## Exercise 3: Export a model to OpenVINO with INT8 quantization
 
 **Goal:** Export a trained object detection model to OpenVINO and quantize it to INT8, so it runs
 efficiently on Intel hardware.
 **Time:** about 10 minutes.
 
-We have trained an RF-DETR object detection model for you before the session. You will run the
-export script from the object detection trainer on that model.
+The public **Object Detection Trainer** already contains pretrained RF-DETR models, so you do not need
+to train or select a model first. You will run its export script on the built-in RF-DETR Nano model.
 
 1. Go to [Training-aaS → Experiments](https://hafnia.milestonesys.com/dashboard/training-aas/experiments)
-   and open the shared experiment **`EXPERIMENT-NAME-TBD`**.
-2. Create a new experiment from it, using the same dataset and the **Object Detection Trainer**.
-3. **Command:** select the `scripts/export_openvino.py` script. Turn on **quantize** and set a fixed
-   **resolution**. The command should look like this:
+   and click **Create Experiment**.
+2. **Dataset:** select "Vehicles Detection (Free)" (`midwest-vehicle-detection`). The export uses images from this dataset to calibrate
+   the quantization.
+3. **Trainer package:** choose **Or select existing trainer package**, open the **Public Trainers** tab
+   and select the **Object Detection Trainer (Public)**.
+4. **Command Builder:** press the `Change command schema` button and select the `scripts/export_openvino.py` script. Turn on **quantize**. Leave `model_path` at its default (`./pretrained_models/RFDETRNano.zip`). The command
+   should look like this:
 
    ```bash
-   python scripts/export_openvino.py --resolution 384 --quantize
+   python scripts/export_openvino.py --quantize
    ```
 
    Quantization needs a fixed input resolution, so do not leave `resolution` empty.
-4. **Checkpoint:** select the trained checkpoint from the shared experiment.
-5. **Name:** include your name, for example `jane-doe-openvino-int8`.
-6. Click **Create Experiment**.
+5. **Hardware:** select the `lite` configuration.
+6. **Name:** include your name, for example `jane-doe-openvino-int8`.
+7. Click **Create Experiment**.
 
 **You are done when** the experiment has finished and its model files include the OpenVINO model
 (`inference_model_int8.xml` and `inference_model_int8.bin`).
 
-**What happened:** the script converted the model to OpenVINO format and then applied post-training INT8
-quantization. It used about 300 images from the hidden dataset to calibrate the model, so the data never
-left the platform.
+**What happened:** the script took the pretrained model bundled with the trainer, converted it to OpenVINO
+format and applied post-training INT8 quantization. It used about 300 images from the hidden dataset to
+calibrate the model, so the data never left the platform.
+
+**Want more?** Run the same export on a model you trained yourself: select its checkpoint when you
+create the experiment, and the script exports that checkpoint instead of the pretrained model.
 
 ---
 

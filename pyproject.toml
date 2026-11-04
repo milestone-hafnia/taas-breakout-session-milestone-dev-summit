@@ -2,7 +2,10 @@
 name = "breakout-session"
 version = "0.1.0"
 requires-python = ">=3.11"
-dependencies = ["python-pptx>=1.0.2"]
+dependencies = [
+    "hafnia>=0.8.7",
+    "python-pptx>=1.0.2",
+]
 
 [dependency-groups]
 dev = [
@@ -16,3 +19,8 @@ dev = [
     "nbformat>=5.11.1",
     "pillow>=13.0.0",
 ]
+
+[tool.ruff]
+lint.select = ["I", "E", "F"]
+lint.ignore = ["E501"]
+line-length = 120
