@@ -290,12 +290,14 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
+IMAGE_SIZE = 64
+
 path_images = Path("data/my-shapes")
 path_images.mkdir(parents=True, exist_ok=True)
 shape_names = ["circle", "square", "triangle"]
 
 
-def draw_shape(shape, size=64):
+def draw_shape(shape, size=IMAGE_SIZE):
     image = Image.new("RGB", (size, size), "white")
     draw = ImageDraw.Draw(image)
     color = tuple(random.randint(0, 200) for _ in range(3))

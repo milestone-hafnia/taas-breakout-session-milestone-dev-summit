@@ -1,9 +1,6 @@
-from pathlib import Path
-
 from hafnia import utils
 from hafnia.dataset.dataset_recipe.dataset_recipe import DatasetRecipe
 from hafnia.dataset.hafnia_dataset import HafniaDataset
-from rich import print as rprint
 
 COCO_VERSION = "1.0.0"
 MIDWEST_VERSION = "1.0.0"

@@ -20,6 +20,7 @@ path_tmp.mkdir(parents=True, exist_ok=True)
 dataset = HafniaDataset.from_name("mnist", version="1.0.0")
 dataset.print_stats()
 
+
 # Get access to a few full and public dataset through Hafnia (no login required)
 # Available datasets: "mnist", "caltech-101", "caltech-256", "cifar10", "cifar100", "coco-2017"
 public_dataset = HafniaDataset.from_name_public_dataset("mnist", n_samples=100)
