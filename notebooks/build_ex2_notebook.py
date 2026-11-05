@@ -223,7 +223,7 @@ class_mapping = {
     "6 - six": "even",
     "7 - seven": "odd",
     "8 - eight": "even",
-    "9 - nine": "__REMOVE__",  # Drop all nines
+    "9 - nine": "odd",
 }
 
 recipe = DatasetRecipe.from_name("mnist", version="1.0.0").class_mapper(class_mapping=class_mapping)
