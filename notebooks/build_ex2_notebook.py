@@ -271,8 +271,8 @@ recipe.splits_by_ratios({"train": 0.8, "val": 0.1, "test": 0.1})
         """
 ## 5. Launch training on your recipe
 
-Launch the public **Image Classification Trainer** on your even/odd recipe. This is the same trainer as in
-Exercise 1. Only the data changed, and you did not have to write any training code.
+Launch the public **Image Classification Trainer** on your even/odd recipe. It works like the object detection
+trainer from Exercise 1: you pick the data and the arguments, and you do not write any training code.
 
 First, look up the trainer's ID.
 """

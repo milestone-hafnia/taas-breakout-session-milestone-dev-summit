@@ -43,22 +43,23 @@ It takes a few minutes and lets us start training right away.
 
 ## Exercise 1b: Launch your first training run
 
-**Goal:** Train an image classification model without writing any code.
+**Goal:** Train an object detection model without writing any code.
 **Time:** about 10 minutes.
 
-You will train a ResNet-18 image classifier on the `mnist` dataset, using a public trainer provided by Hafnia.
+You will train an RF-DETR object detector to find vehicles in CCTV images, using a public trainer provided by Hafnia.
 
 1. Log in at [hafnia.milestonesys.com](https://hafnia.milestonesys.com/) and check that
    `BreakoutSessionDevSummit` is your active organization.
 2. Go to [Training-aaS → Experiments](https://hafnia.milestonesys.com/dashboard/training-aas/experiments)
    and click **Create Experiment**.
-3. **Dataset:** select `mnist`.
+3. **Dataset:** select **Vehicles Detection (Free) (Tiny) - US Midwest CCTV**.
+   Make sure you pick the **(Tiny)** version. It is small, so training finishes within the session.
 4. **Trainer package:** choose **Or select existing trainer package**, open the **Public Trainers** tab
-   and select the **Image Classification Trainer (public)** trainer.
+   and select the **Object Detection Trainer (Public)**.
 5. **Command Builder:** You are now navigated to the command builder. It shows the command that will be run for training, and lets you change arguments.
    Use the command builder to try changing arguments, for example the number of `epochs` to 5.
 6. **Hardware:** select the `lite` configuration.
-7. **Name:** Add a name to your experiment. Select something unique of your own choosing, for example `jane-doe-mnist`.
+7. **Name:** Add a name to your experiment. Select something unique of your own choosing, for example `peter-parker-vehicles`.
 8. Click **Create Experiment**.
 9. **Recommendation**: After launching the experiment, you will be navigated to the experiment page. All breakout session participants share this organization, so click the "My Experiments" chip to see only your experiments.
 10. Click your experiment to open its page. You can see the training metrics appear in real time as the experiment runs.
