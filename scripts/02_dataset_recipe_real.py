@@ -1,7 +1,7 @@
 from hafnia.dataset.dataset_recipe.dataset_recipe import DatasetRecipe
 
 if __name__ == "__main__":
-    # Use case: Create Person and Vehicle datasets by combining "coco-2017" and "midwest-vehicle-detection" datasets
+    # Use case: Create Person and Vehicle dataset by combining "coco-2017" and "midwest-vehicle-detection" datasets
     recipe_person_vehicle = DatasetRecipe.from_merge(
         recipe0=(
             DatasetRecipe.from_name(

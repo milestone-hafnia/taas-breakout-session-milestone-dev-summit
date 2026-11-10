@@ -33,8 +33,7 @@ from code, and you customize the data the model trains on:
 2. **CLI tour:** list datasets, trainers and environments from the command line.
 3. **Datasets:** load the *sample* of a dataset and look inside it.
 4. **Dataset recipes:** turn MNIST into a new "even vs. odd" task and save it as a recipe on the platform.
-5. **Your own data:** build a small dataset of your own.
-6. **Launch:** train the public classification trainer on your new recipe, with one CLI command.
+5. **Launch:** train the public classification trainer on your new recipe, with one CLI command.
 
 **Time:** about 15 minutes. Run the cells from top to bottom with **Shift + Enter**.
 
@@ -270,116 +269,7 @@ recipe.splits_by_ratios({"train": 0.8, "val": 0.1, "test": 0.1})
     ),
     md(
         """
-## 5. Bring your own data
-
-You can also add your own images. If your data is already in YOLO or COCO format, one line converts it:
-
-```python
-HafniaDataset.from_yolo_format(path)
-HafniaDataset.from_coco_format(path)
-```
-
-For any other format, build the samples yourself. As an example, draw 60 images of circles, squares and
-triangles, label each one, and turn them into a `HafniaDataset`.
-"""
-    ),
-    code(
-        """
-import random
-from pathlib import Path
-
-from PIL import Image, ImageDraw
-
-IMAGE_SIZE = 64
-
-path_images = Path("data/my-shapes")
-path_images.mkdir(parents=True, exist_ok=True)
-shape_names = ["circle", "square", "triangle"]
-
-
-def draw_shape(shape, size=IMAGE_SIZE):
-    image = Image.new("RGB", (size, size), "white")
-    draw = ImageDraw.Draw(image)
-    color = tuple(random.randint(0, 200) for _ in range(3))
-    x0, y0 = random.randint(4, 20), random.randint(4, 20)
-    x1, y1 = x0 + random.randint(28, 40), y0 + random.randint(28, 40)
-    if shape == "circle":
-        draw.ellipse((x0, y0, x1, y1), fill=color)
-    elif shape == "square":
-        draw.rectangle((x0, y0, x1, y1), fill=color)
-    else:
-        draw.polygon([((x0 + x1) // 2, y0), (x0, y1), (x1, y1)], fill=color)
-    return image
-
-
-random.seed(42)
-my_images = []
-for i in range(60):
-    shape = shape_names[i % 3]
-    path_image = path_images / f"{shape}_{i:02d}.png"
-    draw_shape(shape).save(path_image)
-    my_images.append((path_image, shape))
-
-print(f"Created {len(my_images)} images in {path_images}")
-"""
-    ),
-    md(
-        """
-Describe each image as a `Sample` with its label, and the dataset as a `DatasetInfo` with its task and classes.
-"""
-    ),
-    code(
-        """
-from hafnia.dataset.hafnia_dataset_types import DatasetInfo, TaskInfo
-from hafnia.dataset.primitives import Classification
-
-samples = []
-for i, (path_image, shape) in enumerate(my_images):
-    label = Classification(class_name=shape, class_idx=shape_names.index(shape))
-    split = "train" if i < 48 else "validation"
-    samples.append(Sample(file_path=str(path_image), height=IMAGE_SIZE, width=IMAGE_SIZE, split=split, classifications=[label]))
-
-info = DatasetInfo(
-    dataset_name=f"{NAME}-my-shapes",
-    version="0.0.1",
-    tasks=[TaskInfo.from_class_names(primitive=Classification, class_names=shape_names)],
-)
-my_dataset = HafniaDataset.from_samples_list(samples_list=samples, info=info)
-my_dataset.print_stats()
-show_samples(my_dataset.shuffle(seed=1))
-"""
-    ),
-    md(
-        """
-Your images are now a `HafniaDataset`, in the same format as every dataset in the Hafnia data library. From
-here you can:
-
-- combine them with platform datasets in a recipe,
-- write them to disk with `my_dataset.write(path)`, or export them with `to_yolo_format` / `to_coco_format`,
-- upload them to your organization, so trainers can use them (see below).
-"""
-    ),
-    md(
-        """
-### Uploading a dataset to the platform
-
-When you have a dataset you want to train on, upload it with one call: `my_dataset.upload_to_platform()`.
-
-- The dataset name and version come from the `DatasetInfo` (here `{NAME}-my-shapes`, version `0.0.1`).
-- The images and annotations are synced to your organization's storage, and the dataset shows up in the
-  **Data library**, where you can browse samples and class distributions.
-- Uploading the same name and version again is refused by default (or asks you to confirm). Use
-  `my_dataset.upload_to_platform(allow_version_overwrite=True)` to replace an existing version, or bump the
-  `version` in `DatasetInfo` to keep both.
-- Once uploaded, use the dataset like any other: by name in a recipe, or with `-d` in `hafnia experiment create`.
-
-We skip the upload today, so that 50 participants don't fill the shared organization with test datasets.
-Try it in your own organization after the session.
-"""
-    ),
-    md(
-        """
-## 6. Launch training on your recipe
+## 5. Launch training on your recipe
 
 Launch the public **Image Classification Trainer** on your even/odd recipe. This is the same trainer as in
 Exercise 1. Only the data changed, and you did not have to write any training code.
@@ -439,7 +329,6 @@ You have:
 - configured the Hafnia CLI and SDK with one command,
 - explored a dataset through its downloadable sample,
 - changed the training task with a dataset recipe, without touching the data or the trainer,
-- built a dataset from your own images,
 - launched a cloud training run on hidden data from a notebook.
 
 **Want more?**

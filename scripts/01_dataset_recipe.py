@@ -1,6 +1,7 @@
 from hafnia import utils
 from hafnia.dataset.dataset_recipe.dataset_recipe import DatasetRecipe
 from hafnia.dataset.hafnia_dataset import HafniaDataset
+from rich import print as rprint
 
 COCO_VERSION = "1.0.0"
 MIDWEST_VERSION = "1.0.0"
@@ -17,6 +18,7 @@ dataset = HafniaDataset.from_name(name="mnist", version=MNIST_VERSION).shuffle()
 
 # Now the same dataset is created using the 'DatasetRecipe' interface.
 dataset_recipe = DatasetRecipe.from_name(name="mnist", version=MNIST_VERSION).shuffle().select_samples(n_samples=20)
+rprint(dataset_recipe)  # Note that this is a recipe, not the actual dataset yet.
 dataset = dataset_recipe.build()
 # Note that the interface is similar, but to actually create the dataset you need to call `build()` on the recipe.
 
